@@ -321,7 +321,9 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
+"Assets/Crosshair.cs"
 "Assets/HashIDs.cs"
+"Assets/Launch.cs"
 "Assets/MoveCamera.cs"
 "Assets/PlayerMovement.cs"
 -langversion:8.0
