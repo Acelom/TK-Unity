@@ -57,10 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MoveCamera.cs" />
+    <Compile Include="Assets\Shield.cs" />
     <Compile Include="Assets\HashIDs.cs" />
-    <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\Shoot.cs" />
     <Compile Include="Assets\Crosshair.cs" />
     <Compile Include="Assets\Launch.cs" />
+    <Compile Include="Assets\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

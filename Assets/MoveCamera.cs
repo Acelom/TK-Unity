@@ -19,12 +19,12 @@ public class MoveCamera : MonoBehaviour
         {
             transform.position += 2 * transform.forward * ((Vector3.Distance(transform.position, target.position) - 2));
         }
-        else if (Vector3.Distance(transform.position, target.position) < 2.5)
+        else if (Vector3.Distance(transform.position, target.position) < 5)
         {
             transform.position += 2 * transform.forward * Time.deltaTime * ((Vector3.Distance(transform.position, target.position) - 3));
 
         }
-        else if (Vector3.Distance(transform.position, target.position) > 3.5)
+        else if (Vector3.Distance(transform.position, target.position) > 6)
         {
             transform.position += 2 * transform.forward * Time.deltaTime * ((Vector3.Distance(transform.position, target.position) - 3));
         }

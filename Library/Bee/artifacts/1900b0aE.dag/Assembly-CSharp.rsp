@@ -326,6 +326,8 @@
 "Assets/Launch.cs"
 "Assets/MoveCamera.cs"
 "Assets/PlayerMovement.cs"
+"Assets/Shield.cs"
+"Assets/Shoot.cs"
 -langversion:8.0
 
 /deterministic

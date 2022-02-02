@@ -8,21 +8,23 @@ public class Launch : MonoBehaviour
     public float liftTime;
     public float maxSpeed;
     public float acceleration; 
-    public Transform holdPosition;
     public float launchSpeed; 
-
-
-
+    public Transform holdPosition;
+    public Transform creationPosition;
+   
     private GameObject launchItem;
     private Camera cam;
     private bool timerOn;
+    private GameObject[] launchList; 
     private float timer;
     private float speed;
-    private float distance; 
+    private float distance;
+   
 
     private void Awake()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
+        launchList = GameObject.FindGameObjectsWithTag("LaunchObject");
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
 
@@ -32,13 +34,26 @@ public class Launch : MonoBehaviour
         {
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && launchItem is null && hit.transform.gameObject.GetComponent<Rigidbody>() != null)
+            if (Physics.Raycast(ray, out hit) && launchItem is null)
             {
-                launchItem = hit.transform.gameObject;
-                launchItem.GetComponent<Rigidbody>().AddForce(0, liftForce * (launchItem.GetComponent<Rigidbody>().mass), 0);
+                if (hit.transform.gameObject.GetComponent<Rigidbody>() != null)
+                {
+                    launchItem = hit.transform.gameObject;
+                }
+                else if (hit.transform.gameObject.GetComponent<Rigidbody>() == null)
+                {
+                    launchItem = (GameObject)Instantiate(launchList[Random.Range(0, launchList.Length)]); 
+                    launchItem.transform.parent = null;
+                    launchItem.transform.position = creationPosition.transform.position;
+                    launchItem.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+                   
+                }
+
+                launchItem.GetComponent<Rigidbody>().AddForce(0, liftForce * (launchItem.GetComponent<Rigidbody>().mass), 0 );
                 timerOn = true;
                 distance = Vector3.Distance(launchItem.transform.position, holdPosition.position);
             }
+            
 
             if (timerOn)
             {
@@ -54,6 +69,7 @@ public class Launch : MonoBehaviour
                 {
                     speed += acceleration;
                 }
+                Debug.Log(speed);
             }
 
         }
@@ -67,6 +83,7 @@ public class Launch : MonoBehaviour
             launchItem.GetComponent<Rigidbody>().AddTorque(Random.Range(0f, 50f * (launchItem.GetComponent<Rigidbody>().mass)), Random.Range(0f, 50f * (launchItem.GetComponent<Rigidbody>().mass)), Random.Range(0f, 50f * (launchItem.GetComponent<Rigidbody>().mass)));
             launchItem = null;
             timerOn = false;
+            speed = 0; 
             timer = 0;
         }
     }      
